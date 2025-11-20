@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFP BESS Sizing Questionnaire - Water Pump Manufacturing Industry</title>
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-gray-400-rgb: 119, 124, 124;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(var(--color-gray-300), 0.7);
+                --color-primary: var(--color-teal-300);
+                --color-primary-hover: var(--color-teal-400);
+                --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background: var(--color-background);
+            color: var(--color-text);
+            padding: var(--space-24);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: var(--space-32);
+            padding-bottom: var(--space-24);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--space-8);
+            color: var(--color-text);
+        }
+
+        .header p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-16);
+            padding-bottom: var(--space-12);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .question {
+            margin-bottom: var(--space-24);
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--space-8);
+            color: var(--color-text);
+            font-size: 14px;
+        }
+
+        .question-hint {
+            display: block;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-12);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-surface);
+            color: var(--color-text);
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);
+        }
+
+        .radio-label,
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            padding: var(--space-12) var(--space-32);
+            border-radius: var(--radius-base);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-submit:active {
+            background: var(--color-primary-active);
+        }
+
+        .submit-section {
+            margin-top: var(--space-32);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin-top: var(--space-24);
+            color: var(--color-text);
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-16);
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .section {
+                padding: var(--space-16);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Questionnaire for Sizing LFP BESS</h1>
+            <p>Water Pump Manufacturing Industry</p>
+        </div>
+
+        <form id="bessForm">
+            <!-- Section 1: Facility and Load Profile Information -->
+            <div class="section">
+                <h2 class="section-title">1. Facility and Load Profile Information</h2>
+                
+                <div class="question">
+                    <label class="question-label">
+                        What is the total area of the manufacturing facility (in square meters)?
+                    </label>
+                    <input type="number" name="facility_area" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the location of the facility?
+                        <span class="question-hint">Specify city/region in India</span>
+                    </label>
+                    <input type="text" name="facility_location" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are the operating hours of the facility?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="operating_hours" value="8-hours">
+                            8 hours/day
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="operating_hours" value="2-shifts">
+                            2 shifts (16 hours/day)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="operating_hours" value="24-7">
+                            24/7 operation
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="operating_hours" value="other">
+                            Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there seasonal variations in production?
+                    </label>
+                    <textarea name="seasonal_variations" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the total connected load (in kW) for the facility?
+                    </label>
+                    <input type="number" name="total_connected_load" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the peak demand (in kW) and when does it occur?
+                    </label>
+                    <textarea name="peak_demand" rows="3" required></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What percentage of the load is critical (e.g., water pumps that must run continuously)?
+                    </label>
+                    <input type="number" name="critical_load_percentage" min="0" max="100">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the average daily energy consumption (in kWh)?
+                    </label>
+                    <input type="number" name="avg_daily_consumption" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        How many water pumps are in operation, and what are their individual power ratings (in kW)?
+                    </label>
+                    <textarea name="water_pumps_details" rows="4" required></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the typical runtime of each pump per day (in hours)?
+                    </label>
+                    <input type="number" name="pump_runtime" step="0.1">
+                </div>
+            </div>
+
+            <!-- Section 2: Energy Supply and Grid Connection -->
+            <div class="section">
+                <h2 class="section-title">2. Energy Supply and Grid Connection</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Is the facility connected to the grid, or is it off-grid?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="grid_connection" value="grid-connected" required>
+                            Grid-connected
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="grid_connection" value="off-grid" required>
+                            Off-grid
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="grid_connection" value="hybrid" required>
+                            Hybrid
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the reliability of the grid supply?
+                        <span class="question-hint">Frequency and duration of outages</span>
+                    </label>
+                    <textarea name="grid_reliability" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the current electricity tariff structure?
+                        <span class="question-hint">Time-of-use rates, fixed rates, demand charges</span>
+                    </label>
+                    <textarea name="tariff_structure" rows="4" required></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Does the facility have existing renewable energy sources?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="existing_renewable" value="yes">
+                            Yes
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="existing_renewable" value="no">
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        If yes, what is the installed capacity (in kW) and typical daily generation (in kWh)?
+                    </label>
+                    <input type="text" name="renewable_capacity">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Does the facility currently use diesel generators or other backup systems?
+                    </label>
+                    <textarea name="backup_systems" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 3: BESS Objectives and Requirements -->
+            <div class="section">
+                <h2 class="section-title">3. BESS Objectives and Requirements</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are the main goals for installing the BESS?
+                        <span class="question-hint">Select all that apply</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bess_goals" value="backup_power">
+                            Backup power
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bess_goals" value="peak_shaving">
+                            Peak shaving
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bess_goals" value="load_shifting">
+                            Load shifting
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bess_goals" value="renewable_integration">
+                            Renewable energy integration
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bess_goals" value="cost_savings">
+                            Cost savings
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the required backup duration (in hours) for critical loads during grid outages?
+                    </label>
+                    <input type="number" name="backup_duration" step="0.5" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Is the BESS intended to support critical loads only, or the entire facility?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="bess_coverage" value="critical_only">
+                            Critical loads only
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bess_coverage" value="entire_facility">
+                            Entire facility
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the target reduction in peak demand (in kW)?
+                    </label>
+                    <input type="number" name="peak_reduction_target">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        If integrating with solar PV, what is the desired level of self-consumption vs. grid export?
+                    </label>
+                    <textarea name="solar_integration_strategy" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 4: Technical Specifications and Constraints -->
+            <div class="section">
+                <h2 class="section-title">4. Technical Specifications and Constraints</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the available space for BESS installation (in square meters)?
+                    </label>
+                    <input type="number" name="bess_space" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there specific environmental conditions at the installation site?
+                        <span class="question-hint">Temperature, humidity, dust</span>
+                    </label>
+                    <textarea name="environmental_conditions" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the voltage level of the facility's electrical system?
+                    </label>
+                    <select name="voltage_level" required>
+                        <option value="">Select voltage level</option>
+                        <option value="415V">415V</option>
+                        <option value="11kV">11kV</option>
+                        <option value="33kV">33kV</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the desired depth of discharge (DoD) for the BESS?
+                    </label>
+                    <input type="number" name="desired_dod" min="0" max="100" placeholder="e.g., 80, 90">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there specific safety standards or certifications required?
+                        <span class="question-hint">e.g., UL 9540, IEC 62619</span>
+                    </label>
+                    <textarea name="safety_standards" rows="2"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 5: Financial and Economic Considerations -->
+            <div class="section">
+                <h2 class="section-title">5. Financial and Economic Considerations</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the budget allocated for the BESS project (in INR)?
+                    </label>
+                    <input type="number" name="budget_inr">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the expected payback period or return on investment (ROI)?
+                    </label>
+                    <input type="text" name="expected_roi" placeholder="e.g., 5 years">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are the current costs of grid electricity, diesel backup, and other energy sources?
+                    </label>
+                    <textarea name="current_energy_costs" rows="4"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the expected lifespan of the BESS (in years)?
+                    </label>
+                    <input type="number" name="expected_lifespan" min="1" max="30">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there warranties or performance guarantees required from the BESS supplier?
+                    </label>
+                    <textarea name="warranty_requirements" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 6: Environmental and Sustainability Goals -->
+            <div class="section">
+                <h2 class="section-title">6. Environmental and Sustainability Goals</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the current carbon footprint of the facility (in tons of CO2e)?
+                    </label>
+                    <input type="number" name="carbon_footprint">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the target reduction in emissions with the BESS?
+                    </label>
+                    <input type="text" name="emission_reduction_target">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there specific sustainability certifications or goals?
+                        <span class="question-hint">e.g., ISO 14001, net-zero targets</span>
+                    </label>
+                    <textarea name="sustainability_goals" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are the plans for battery recycling or disposal at the end of life?
+                    </label>
+                    <textarea name="recycling_plans" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 7: Vendor and Procurement Preferences -->
+            <div class="section">
+                <h2 class="section-title">7. Vendor and Procurement Preferences</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there preferred vendors or manufacturers for the BESS?
+                    </label>
+                    <input type="text" name="preferred_vendors">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are the criteria for vendor selection?
+                        <span class="question-hint">Cost, experience, local support, etc.</span>
+                    </label>
+                    <textarea name="vendor_criteria" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Are there requirements for local content or manufacturing (e.g., Make in India)?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="local_content" value="yes">
+                            Yes
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="local_content" value="no">
+                            No
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="local_content" value="preferred">
+                            Preferred but not mandatory
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the expected timeline for BESS procurement and installation?
+                    </label>
+                    <input type="text" name="procurement_timeline" placeholder="e.g., 6-9 months">
+                </div>
+            </div>
+
+            <!-- Section 8: Solar Energy Integration -->
+            <div class="section">
+                <h2 class="section-title">8. Solar Energy Integration</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you currently have or plan to install a solar PV system at the facility?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="solar_pv" value="existing">
+                            Already have solar PV
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="solar_pv" value="planned">
+                            Planning to install
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="solar_pv" value="no">
+                            No plans for solar
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        If yes, what is the current or planned capacity (in kWp)?
+                    </label>
+                    <input type="number" name="solar_capacity">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the available roof space or land area for solar PV installation (in square meters)?
+                    </label>
+                    <input type="number" name="solar_space">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is your expectation for the performance ratio of the solar installation?
+                        <span class="question-hint">e.g., 80% or higher</span>
+                    </label>
+                    <input type="text" name="solar_performance_ratio">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Would you prefer a hybrid system where the BESS stores excess solar energy for use during non-sunlight hours?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="hybrid_system" value="yes">
+                            Yes
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="hybrid_system" value="no">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Wind Energy Integration -->
+            <div class="section">
+                <h2 class="section-title">9. Wind Energy Integration</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Do you currently have or are you planning to install wind turbines at or near the facility?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="wind_turbines" value="existing">
+                            Already have wind turbines
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="wind_turbines" value="planned">
+                            Planning to install
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="wind_turbines" value="no">
+                            No plans for wind
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        If yes, provide details on capacity and expected annual energy production
+                    </label>
+                    <textarea name="wind_details" rows="4"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is the wind resource profile at your location?
+                        <span class="question-hint">Average wind speeds, seasonal variations</span>
+                    </label>
+                    <textarea name="wind_resource" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What is your strategy for integrating wind energy with the BESS?
+                    </label>
+                    <textarea name="wind_integration_strategy" rows="4"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        What are your ROI expectations specifically for the wind energy component?
+                    </label>
+                    <input type="text" name="wind_roi" placeholder="e.g., 7-year payback period">
+                </div>
+            </div>
+
+            <!-- Section 10: Additional Information -->
+            <div class="section">
+                <h2 class="section-title">10. Additional Information</h2>
+
+                <div class="question">
+                    <label class="question-label">
+                        Who are the key stakeholders involved in the decision-making process?
+                    </label>
+                    <textarea name="stakeholders" rows="3"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Has the facility previously implemented energy storage or renewable energy projects?
+                    </label>
+                    <textarea name="past_projects" rows="4"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        How does the BESS fit into the long-term energy strategy of the facility?
+                    </label>
+                    <textarea name="long_term_strategy" rows="4"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Contact Name
+                    </label>
+                    <input type="text" name="contact_name" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Contact Email
+                    </label>
+                    <input type="email" name="contact_email" required>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Contact Phone Number
+                    </label>
+                    <input type="text" name="contact_phone">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Additional Comments or Concerns
+                    </label>
+                    <textarea name="additional_comments" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="btn-submit">Submit Questionnaire</button>
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <strong>✓ Questionnaire submitted successfully!</strong>
+            <p>Thank you for completing the BESS sizing questionnaire. Your responses have been recorded.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            
+            // Handle regular inputs
+            for (let [key, value] of formData.entries()) {
+                if (key === 'bess_goals') {
+                    // Handle checkboxes (multiple values)
+                    if (!data[key]) {
+                        data[key] = [];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Log the collected data (in a real application, this would be sent to a server)
+            console.log('Form Data:', JSON.stringify(data, null, 2));
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Optional: Reset form after a delay
+            setTimeout(() => {
+                // this.reset();
+                // document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+            
+            // In a production environment, you would send this data to your server:
+            // fetch('/api/submit-questionnaire', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+        });
+    </script>
+</body>
+</html>
